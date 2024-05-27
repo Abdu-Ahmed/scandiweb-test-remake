@@ -16,7 +16,7 @@
     <div class="container mt-5">
     <header class="d-flex justify-content-between align-items-center pb-5 border-bottom mb-4">
     <div class="container">
-        <form id="product_form" action="<?php echo BASE_URL; ?>/add/save" method="POST">
+        <form id="product_form" action="<?php echo BASE_URL; ?>/save" method="POST">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1 class="mb-0">Add Product</h1>
                 <div>
