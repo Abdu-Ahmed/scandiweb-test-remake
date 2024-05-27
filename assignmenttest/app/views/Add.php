@@ -41,7 +41,7 @@
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" class="form-control w-25" id="price" name="price" value="<?php echo htmlspecialchars($postData['price'] ?? ''); ?>">
+                <input type="text" class="form-control w-25" id="price" name="price" value="<?php echo htmlspecialchars($postData['price'] ?? ''); ?>">
             </div>
             <div class="mb-3">
                 <label for="productType" class="form-label">Product Type</label>
