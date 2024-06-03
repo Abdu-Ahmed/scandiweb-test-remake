@@ -11,6 +11,7 @@ class Add extends Controller {
         $error = isset($_GET['error']);
         $invalidSku = isset($_GET['invalidsku']);
         $emptyFields = isset($_GET['emptyfields']);
+        $noProductSelected = isset($_GET['errorselect']);
         $message = null;
 
         if ($error) {
@@ -19,7 +20,9 @@ class Add extends Controller {
             $message = "SKU already exists!";
         } elseif ($emptyFields) {
             $message = Validator::EMPTY_FIELD_MESSAGE;
-        }
+        } elseif ($noProductSelected) {
+            $message = "Please select a product!";
+        } 
 
         $this->view('Add', ['message' => $message]);
     }
@@ -27,6 +30,7 @@ class Add extends Controller {
     public function save() {
         $validator = new Validator;
         $postData = $_POST ?? [];
+        $postData = array_map('htmlspecialchars', $postData);
 
         // check if sku already exists
         $product = new \App\Models\Product(new Database());
@@ -44,30 +48,25 @@ class Add extends Controller {
         if (!$validator->validateNotEmpty($postData['name'])) {
             $emptyErrors[] = Validator::EMPTY_FIELD_MESSAGE;
         }
+        // Validate the price field
         if (!$validator->validateNotEmpty($postData['price'])) {
             $emptyErrors[] = Validator::EMPTY_FIELD_MESSAGE;
-        }
+        } elseif (!$validator->validatePrice($postData['price'])) {
+           header("Location:" . BASE_URL . "/add?error");
+           exit();
+           }
 
         // If there are any empty field errors, redirect back to the add form with empty field error message
         if (!empty($emptyErrors)) {
             header("Location:" . BASE_URL . "/add?emptyfields");
             exit();
         }
-
-        // Validate specific attributes based on product type
-        $specificAttributesMap = [
-            'DVD' => ['size'],
-            'Book' => ['weight'],
-            'Furniture' => ['height', 'width', 'length']
-        ];
-
-        $productType = $postData['productType'];
-        $specificAttributes = array_intersect_key($postData, array_flip($specificAttributesMap[$productType] ?? []));
-
         // Create an instance of the corresponding product class based on the selected type
+        $productType = $postData['productType'];
+       
         $productClass = "\\App\\Controllers\\$productType";
         if (!class_exists($productClass)) {
-            echo "Invalid product type.";
+            header("Location:" . BASE_URL . "/add?errorselect");
             exit();
         }
 
@@ -78,18 +77,15 @@ class Add extends Controller {
         $product->setSku($postData['sku']);
         $product->setName($postData['name']);
         $product->setPrice($postData['price']);
-        $product->setProductType($productType); // Set product_type dynamically
+        $product->setProductType($productType); // set product_type dynamically
 
-       // Set specific attributes and validate them
-        foreach ($specificAttributes as $attribute => $value) {
-            $setterMethod = 'set' . ucfirst($attribute);
-            if (method_exists($product, $setterMethod)) {
-                $product->$setterMethod($value);
-            }
-            if (!$validator->validateInteger($value)) {
-                $errors[] = Validator::VALIDATION_MESSAGE;
-            }
-        }
+        // extract specific attributes using the method from each product class
+        $specificAttributesMap = $productClass::getSpecificAttributesMap();
+        $specificAttributes = array_intersect_key($postData, array_flip($specificAttributesMap));
+        
+
+       // Set specific attributes
+         $product->setSpecificAttributes($specificAttributes);
 
         // Perform validation
         if (!$productClass::validateAttributes($validator, $specificAttributes)) {
