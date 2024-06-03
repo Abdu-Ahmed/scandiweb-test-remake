@@ -12,8 +12,8 @@
         <header class="d-flex justify-content-between align-items-center pb-3 border-bottom mb-4">
             <h1 class="mb-0">Product List</h1>
             <div>
-                <form id="delete-form" action="<?php echo BASE_URL; ?>/delete" method="POST" class="d-inline">
-                    <a href="<?php echo BASE_URL; ?>/add" id="add" class="add btn btn-primary me-2">ADD</a>
+                <form id="delete-form" action="<?php echo htmlspecialchars(BASE_URL . '/delete'); ?>" method="POST" class="d-inline">
+                    <a href="<?php echo htmlspecialchars(BASE_URL . '/add'); ?>" id="add" class="add btn btn-primary me-2">ADD</a>
                     <button id="delete-product-btn" type="submit" class="btn btn-danger">MASS DELETE</button>
             </div>
         </header>
@@ -25,11 +25,11 @@
                 <div class="col">
                     <div class="card h-100">
                         <div class="card-body">
-                            <input class="delete-checkbox form-check-input" type="checkbox" name="product_ids[]" value="<?php echo $product['id']; ?>">
-                            <h5 class="card-title text-center"><?php echo ($product['name']); ?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted text-center">SKU: <?php echo ($product['sku']); ?></h6>
-                            <p class="card-text text-center"><?php echo ($product['price']); ?>$</p>
-                            <p class="card-text text-center">Size: <?php echo ($product['size']); ?> MB</p>
+                            <input class="delete-checkbox form-check-input" type="checkbox" name="product_ids[]" value="<?php echo htmlspecialchars($product['id']); ?>">
+                            <h5 class="card-title text-center"><?php echo htmlspecialchars($product['name']); ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted text-center">SKU: <?php echo htmlspecialchars($product['sku']); ?></h6>
+                            <p class="card-text text-center"><?php echo htmlspecialchars($product['price']); ?>$</p>
+                            <p class="card-text text-center">Size: <?php echo htmlspecialchars($product['size']); ?> MB</p>
                         </div>
                     </div>
                 </div>
@@ -41,11 +41,11 @@
                 <div class="col">
                     <div class="card h-100">
                         <div class="card-body">
-                            <input class="delete-checkbox form-check-input" type="checkbox" name="product_ids[]" value="<?php echo $product['id']; ?>">
-                            <h5 class="card-title text-center"><?php echo ($product['name']); ?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted text-center">SKU: <?php echo ($product['sku']); ?></h6>
-                            <p class="card-text text-center"><?php echo ($product['price']); ?>$</p>
-                            <p class="card-text text-center">Weight: <?php echo ($product['weight']); ?> KG</p>
+                            <input class="delete-checkbox form-check-input" type="checkbox" name="product_ids[]" value="<?php echo htmlspecialchars($product['id']); ?>">
+                            <h5 class="card-title text-center"><?php echo htmlspecialchars($product['name']); ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted text-center">SKU: <?php echo htmlspecialchars($product['sku']); ?></h6>
+                            <p class="card-text text-center"><?php echo htmlspecialchars($product['price']); ?>$</p>
+                            <p class="card-text text-center">Weight: <?php echo htmlspecialchars($product['weight']); ?> KG</p>
                         </div>
                     </div>
                 </div>
@@ -57,11 +57,11 @@
                 <div class="col">
                     <div class="card h-100">
                         <div class="card-body">
-                            <input class="delete-checkbox form-check-input" type="checkbox" name="product_ids[]" value="<?php echo $product['id']; ?>">
-                            <h5 class="card-title text-center"><?php echo ($product['name']); ?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted text-center">SKU: <?php echo ($product['sku']); ?></h6>
-                            <p class="card-text text-center"><?php echo ($product['price']); ?>$</p>
-                            <p class="card-text text-center">Dimensions: <?php echo $product['height'] . 'x' . $product['width'] . 'x' . $product['length'] ?></p>
+                            <input class="delete-checkbox form-check-input" type="checkbox" name="product_ids[]" value="<?php echo htmlspecialchars($product['id']); ?>">
+                            <h5 class="card-title text-center"><?php echo htmlspecialchars($product['name']); ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted text-center">SKU: <?php echo htmlspecialchars($product['sku']); ?></h6>
+                            <p class="card-text text-center"><?php echo htmlspecialchars($product['price']); ?>$</p>
+                            <p class="card-text text-center">Dimensions: <?php echo htmlspecialchars($product['height']) . 'x' . htmlspecialchars($product['width']) . 'x' . htmlspecialchars($product['length']); ?></p>
                         </div>
                     </div>
                 </div>
