@@ -41,7 +41,7 @@
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" class="form-control w-25" id="price" name="price" value="<?php echo htmlspecialchars($postData['price'] ?? ''); ?>">
+                <input type="text" class="form-control w-25" id="price" name="price" value="<?php echo htmlspecialchars($postData['price'] ?? ''); ?>">
             </div>
             <div class="mb-3">
                 <label for="productType" class="form-label">Product Type</label>
@@ -65,8 +65,8 @@
             <!-- Furniture Dimensions Inputs -->
             <div id="FurnitureField" style="display: none;">
             <label for="length" class="form-label">Please, provide furniture dimensions:</label>
-                <input type="text" class="form-control w-25" id="height" name="height" placeholder="Height (CM)" value="<?php echo htmlspecialchars($postData['height'] ?? ''); ?>">
-                <input type="text" class="form-control w-25" id="width" name="width" placeholder="Width (CM)" value="<?php echo htmlspecialchars($postData['width'] ?? ''); ?>">
+                <input type="text" class="form-control w-25" id="height" name="height" placeholder="Height (CM)" value="<?php echo htmlspecialchars($postData['height'] ?? ''); ?>"><br>
+                <input type="text" class="form-control w-25" id="width" name="width" placeholder="Width (CM)" value="<?php echo htmlspecialchars($postData['width'] ?? ''); ?>"><br>
                 <input type="text" class="form-control w-25" id="length" name="length" placeholder="Length (CM)" value="<?php echo htmlspecialchars($postData['length'] ?? ''); ?>">
             </div>
         </form>
