@@ -29,12 +29,12 @@ abstract class Products {
 
     // Setter methods
     public function setId($id) { $this->id = $id; }
-    public function setSku(string $sku) { $this->sku = $sku; }
-    public function setName(string $name) { $this->name = $name; }
-    public function setPrice(float $price) { $this->price = $price; }
-    public function setHeight(int $height) { $this->height = $height; }
-    public function setWidth(int $width) { $this->width = $width; }
-    public function setLength(int $length) { $this->length = $length; }
+    public function setSku($sku) { $this->sku = $sku; }
+    public function setName($name) { $this->name = $name; }
+    public function setPrice($price) { $this->price = $price; }
+    public function setHeight($height) { $this->height = $height; }
+    public function setWidth($width) { $this->width = $width; }
+    public function setLength($length) { $this->length = $length; }
     public function setSize($size) { $this->size = $size; }
     public function setWeight($weight) { $this->weight = $weight; }
     public function setProductType($product_type) {
@@ -44,4 +44,6 @@ abstract class Products {
     abstract public function addProduct(Database $db, $productType);
     abstract public static function validateAttributes(Validator $validator, array $attributes): bool;
     abstract public static function displayProductType($products);
+    abstract protected function setSpecificAttributes(array $attributes);
+    abstract protected static function getSpecificAttributesMap(): array;
 }
