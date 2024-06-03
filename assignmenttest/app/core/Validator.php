@@ -13,15 +13,13 @@ class Validator {
     }
 
     public function validatePrice($value) {
-        // Check if the value is a valid decimal number
         return preg_match('/^\d+(\.\d{1,2})?$/', $value);
-    }
-
-    public function validateInteger($value) {
-        return filter_var($value, FILTER_VALIDATE_INT) !== false;
     }
 
     public function validateNotEmpty($value) {
         return !empty(trim($value));
+    }
+    public function validateFloat($value) {
+        return filter_var($value, FILTER_VALIDATE_FLOAT) !== false;
     }
 }
