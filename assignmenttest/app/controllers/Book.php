@@ -24,7 +24,7 @@ class Book extends Products {
     }
     
     public static function validateAttributes(Validator $validator, array $attributes): bool {
-        return $validator->validateInteger($attributes['weight']);
+        return $validator->validateFloat($attributes['weight']);
     }
     
     public static function displayProductType($product) {
@@ -35,5 +35,11 @@ class Book extends Products {
             'price' => $product['price'],
             'weight' => $product['weight'],
         ];
+    }
+    public  function setSpecificAttributes(array $attributes) {
+        $this->setWeight($attributes['weight']);
+    }
+    public static function getSpecificAttributesMap(): array {
+        return ['weight'];
     }
 }
