@@ -26,9 +26,9 @@ class Furniture extends Products {
     }
     
     public static function validateAttributes(Validator $validator, array $attributes): bool {
-        return $validator->validateInteger($attributes['height']) &&
-               $validator->validateInteger($attributes['width']) &&
-               $validator->validateInteger($attributes['length']);
+        return $validator->validateFloat($attributes['height']) &&
+               $validator->validateFloat($attributes['width']) &&
+               $validator->validateFloat($attributes['length']);
     }
     
     public static function displayProductType($product) {
@@ -41,5 +41,13 @@ class Furniture extends Products {
             'width'  =>  $product['width'], 
             'length' => $product['length']
         ];
+    }
+    public  function setSpecificAttributes(array $attributes) {
+        $this->setHeight($attributes['height']);
+        $this->setWidth($attributes['width']);
+        $this->setLength($attributes['length']);
+    }
+    public static function getSpecificAttributesMap(): array {
+        return ['height', 'width', 'length'];
     }
 }
