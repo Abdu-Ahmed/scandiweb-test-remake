@@ -24,7 +24,7 @@ class DVD extends Products {
     }
     
     public static function validateAttributes(Validator $validator, array $attributes): bool {
-        return $validator->validateInteger($attributes['size']);
+        return $validator->validateFloat($attributes['size']);
     }
     
     public static function displayProductType($product) {
@@ -35,5 +35,11 @@ class DVD extends Products {
             'price' => $product['price'],
             'size' => $product['size']
         ];
+    }
+    public  function setSpecificAttributes(array $attributes) {
+        $this->setSize($attributes['size']);
+    }
+    public static function getSpecificAttributesMap(): array {
+        return ['size'];
     }
 }
